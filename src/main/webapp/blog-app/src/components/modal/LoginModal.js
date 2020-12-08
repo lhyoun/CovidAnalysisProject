@@ -5,7 +5,7 @@ import { Container, Form, Col, Button, Modal } from 'react-bootstrap';
 function LoginModal(props) {
 	const setToken = props.setToken;
 	const [user, setUser] = useState({
-		loginid: "",
+		username: "",
 		password: "",
 	});
 
@@ -22,7 +22,7 @@ function LoginModal(props) {
 
 	const loginRequest = () => {
 		let person = {
-			loginid: user.loginid,
+			username: user.username,
 			password: user.password
 		}
 
@@ -65,10 +65,10 @@ function LoginModal(props) {
 								<Form.Label>아이디</Form.Label>
 								<Form.Control
 									type="text"
-									name="loginid"
+									name="username"
 									placeholder="아이디"
 									onChange={inputHandle}
-									value={user.loginid} />
+									value={user.username} />
 							</Form.Group>
 						</Form.Row>
 						<Form.Row>

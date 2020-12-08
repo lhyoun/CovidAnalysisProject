@@ -13,41 +13,26 @@ const JoinModal = () => {
 	let nicknameCheckFlag = false; 		// nickname 중복확인 플레그 true : 사용가능
 
 
-	const openTextFile = (e) => {
-		e.preventDefault();
-		var input = document.createElement("input");
-		input.type = "file";
-		input.accept = "image/*";
-		input.id = "uploadInput";
-		input.click();
-		input.onchange = function (event) {
-			processFile(event.target.files[0]);
-		};
-	}
+	// const openTextFile = (e) => {
+	// 	e.preventDefault();
+	// 	var input = document.createElement("input");
+	// 	input.type = "file";
+	// 	input.accept = "image/*";
+	// 	input.id = "uploadInput";
+	// 	input.click();
+	// 	input.onchange = function (event) {
+	// 		processFile(event.target.files[0]);
+	// 	};
+	// }
 
-	function processFile(file) {
-		var reader = new FileReader();
-		reader.onload = function () {
-			var result = reader.result;
-			console.log(result);
-			setUser({
-				...user,
-				"image": result
-			});
-		};
-		reader.readAsDataURL(file);
-	}
-
+	
 	const [user, setUser] = useState({
-		loginid: "",
+		
 		username: "",
 		password: "",
-		nickname: "",
+		name: "",
 		email: "",
-		phone: "",
-		location: "",
-		image: "",
-		position: ""
+		role:""
 	});
 
 	const inputHandle = (e) => {
@@ -92,15 +77,12 @@ const JoinModal = () => {
 	const joinRequest = (e) => {
 		e.preventDefault();
 		let person = {
-			loginid: user.loginid,
+			
 			username: user.username,
 			password: user.password,
-			nickname: user.nickname,
+			name: user.name,
 			email: user.email,
-			phone: user.phone,
-			location: user.location,
-			image: "default.png",
-			position: user.position
+			
 		}
 		const keys = Object.keys(person) // ['name', 'weight', 'price', 'isFresh']
 		for (let i = 0; i < keys.length; i++) {
@@ -153,10 +135,10 @@ const JoinModal = () => {
 									<Col md={10}>
 										<Form.Control
 											type="text"
-											name="loginid"
+											name="username"
 											placeholder="아이디"
 											onChange={inputHandle}
-											value={user.loginid} /></Col>
+											value={user.username} /></Col>
 									<Col md={2}><Button variant="dark" onClick={idDuplicateCheck}>중복검사</Button>{' '}
 									</Col>
 								</Row>
@@ -176,28 +158,13 @@ const JoinModal = () => {
 								<Form.Label>이름</Form.Label>
 								<Form.Control
 									type="text"
-									name="username"
+									name="name"
 									placeholder="이름"
 									onChange={inputHandle}
-									value={user.username} />
+									value={user.name} />
 							</Form.Group>
 
-							<Form.Group as={Col} controlId="formGridEmail">
-								<Form.Label>닉네임</Form.Label>
-								<Row>
-									<Col md={10}>
-										<Form.Control
-											type="text"
-											name="nickname"
-											placeholder="닉네임"
-											onChange={inputHandle}
-											value={user.nickname} />
-									</Col>
-									<Col md={2}>
-										<Button variant="dark" onClick={nicknameDuplicateCheck}>중복검사</Button>{' '}
-									</Col>
-								</Row>
-							</Form.Group>
+							
 
 							<Form.Group as={Col} controlId="formGridEmail">
 								<Form.Label>이메일</Form.Label>
@@ -209,7 +176,7 @@ const JoinModal = () => {
 									value={user.email} />
 							</Form.Group>
 
-							<Form.Group as={Col} controlId="formGridEmail">
+							{/* <Form.Group as={Col} controlId="formGridEmail">
 								<Form.Label>휴대폰 번호 </Form.Label>
 								<Form.Control
 									type="tel"
@@ -227,21 +194,11 @@ const JoinModal = () => {
 									placeholder="지역을 입력하세요"
 									onChange={inputHandle}
 									value={user.location} />
-							</Form.Group>
+							</Form.Group> */}
 
-							<Form.Group as={Col} controlId="formGridEmail">
-								<Form.Label>포지션 </Form.Label>
-								<Form.Control
-									type="text"
-									name="position"
-									placeholder="포지션을 입력하세요"
-									onChange={inputHandle}
-									value={user.position} />
-							</Form.Group>
+							
 
-							<Form.Group as={Col} controlId="formGridEmail">
-								<Button variant="dark" name="name" onClick={openTextFile}>Select Image</Button>{' '}
-							</Form.Group>
+						
 
 							<Form.Group as={Col} controlId="formGridEmail">
 								<hr />

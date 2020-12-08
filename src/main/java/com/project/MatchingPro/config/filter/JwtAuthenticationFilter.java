@@ -47,14 +47,14 @@ public class JwtAuthenticationFilter implements Filter{
 			try {
 				User person = om.readValue(req.getInputStream(), User.class);
 				System.out.println(person);
-				if(userRepository.countByUsername(person.getName())==0) {
-				//	System.out.println("============="+person);
+				if(userRepository.countByUsername(person.getUsername())==0) {
+					System.out.println("============="+person);
 					
 					out.print("아이디x");
 					out.flush();
 				}else {
 					User personEntity = 
-							userRepository.findByUsernameAndPassword(person.getName(), person.getPassword());
+							userRepository.findByUsernameAndPassword(person.getUsername(), person.getPassword());
 	
 					if(personEntity == null) {
 						out.print("비번x");
