@@ -17,7 +17,7 @@ const Background = () => {
 	return (
 		<div>
 			<Background_videoStlye id="background-video" loop autoPlay>
-				<source src="soccerstadium1.mp4" type="video/ogg" />
+				<source src="covidepic.mp4" type="video/mp4" />
         		Your browser does not support the video tag.
       		</Background_videoStlye>
 		</div>
