@@ -13,7 +13,7 @@ const ImageStyle =styled.image`
 	min-width: 100%;
 	height: 500px;
 `;
-
+ 
 const VideoStyle=styled.video`
 	min-width: 100%;
 	height: 500px;
