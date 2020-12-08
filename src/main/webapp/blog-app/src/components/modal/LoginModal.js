@@ -51,7 +51,7 @@ function LoginModal(props) {
 
 	return (
 		<div>
-			<Button variant="dark" onClick={handleShow}>로그인</Button>
+			<Button size="m" variant="outline-dark" onClick={handleShow}>SIGN-IN</Button>
 
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
@@ -86,12 +86,12 @@ function LoginModal(props) {
 						<br />
 						<Form.Row>
 							<Col md={2}></Col>
-							<Button variant="info" onClick={loginRequest}>로그인</Button>{' '}
+							<Button size="m" variant="outline-info" onClick={loginRequest}>로그인</Button>{' '}
 						</Form.Row>
 					</Container>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>Close</Button>
+					<Button size="m" variant="outline-info" onClick={handleClose}>Close</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

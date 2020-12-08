@@ -1,10 +1,9 @@
-// ok
+// 서버 retruen값 변경 등이 없으면 건드릴거 없음
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Form, Modal } from 'react-bootstrap';
 
 const JoinModal = () => {
 	const [show, setShow] = useState(false);
-
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
@@ -12,22 +11,7 @@ const JoinModal = () => {
 	let idCheckFlag = false;			// id 중복확인 플레그 true : 사용가능
 	let nicknameCheckFlag = false; 		// nickname 중복확인 플레그 true : 사용가능
 
-
-	// const openTextFile = (e) => {
-	// 	e.preventDefault();
-	// 	var input = document.createElement("input");
-	// 	input.type = "file";
-	// 	input.accept = "image/*";
-	// 	input.id = "uploadInput";
-	// 	input.click();
-	// 	input.onchange = function (event) {
-	// 		processFile(event.target.files[0]);
-	// 	};
-	// }
-
-	
 	const [user, setUser] = useState({
-		
 		username: "",
 		password: "",
 		name: "",
@@ -44,59 +28,42 @@ const JoinModal = () => {
 
 	const idDuplicateCheck = (e) => {
 		e.preventDefault();
-		fetch(`http://localhost:8000/idCheck/${user.loginid}`, {
+		fetch(`http://localhost:8000/idCheck/${user.username}`, {
 			method: "GET",
-			headers: {
-			}
 		}).then(res => res.text())
 			.then(res => {
 				if (res === "ok") {
 					idCheckFlag = true;
 					alert("사용 가능한 아이디  입니다");
-				} else {
-					alert("중복 아이디 입니다");
-				}
-			});
-	}
-
-	const nicknameDuplicateCheck = (e) => {
-		e.preventDefault();
-		fetch(`http://localhost:8000/nicknameCheck/${user.nickname}`, {
-			method: "GET",
-		}).then(res => res.text())
-			.then(res => {
-				if (res === "ok") {
-					nicknameCheckFlag = true;
-					alert("사용 가능한 닉네임  입니다");
-				} else {
-					alert("중복  닉네임  입니다");
-				}
+				} else alert("중복 아이디 입니다");
 			});
 	}
 
 	const joinRequest = (e) => {
 		e.preventDefault();
 		let person = {
-			
 			username: user.username,
 			password: user.password,
 			name: user.name,
 			email: user.email,
-			
 		}
-		const keys = Object.keys(person) // ['name', 'weight', 'price', 'isFresh']
+
+		// 아래의 로직은 빈 값 확인용 로직입니다
+		const keys = Object.keys(person)
 		for (let i = 0; i < keys.length; i++) {
 			const key = keys[i] // 각각의 키
 			const value = person[key] // 각각의 키에 해당하는 각각의 값
 
 			if (value === "") {
-				console.log("joinForm:: empty key: ", key);
-				console.log("joinForm:: empty value: ", value);
+				console.log("joinModal -- 다음의 empty key가 존재합니다: ", key);
+				//console.log("joinForm:: empty value: ", value);
 				emptyFlag = false;	// 빈 값 들어오면 가입 불가능
 			} else {
 				emptyFlag = true;
 			}
 		}
+
+		// 빈 값이 없으면 fetch를 진행합니다
 		if (emptyFlag) {
 			fetch("http://localhost:8000/join", {
 				method: "POST",
@@ -112,19 +79,19 @@ const JoinModal = () => {
 				handleClose();
 			});
 		} else {
-			if (!emptyFlag) alert("빈 값 있음");
-			if (!idCheckFlag) alert("id중복확인을 해 주세요");
-			if (!nicknameCheckFlag) alert("nickname 중복확인을 해 주세요");
+			if (!emptyFlag) alert("모든 정보 입력해주세요");
+			if (!idCheckFlag) alert("id중복확인 해주세요");
+			if (!nicknameCheckFlag) alert("nickname 중복확인 해주세요");
 		}
 	}
 
 	return (
 		<div>
-			<Button variant="dark" onClick={handleShow}>회원가입</Button>
+			<Button size="m" variant="outline-dark" onClick={handleShow}>회원가입</Button>
 
 			<Modal show={show} size={"lg"} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>회원가입</Modal.Title>
+					<Modal.Title>SIGN-UP</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Container>
@@ -139,7 +106,7 @@ const JoinModal = () => {
 											placeholder="아이디"
 											onChange={inputHandle}
 											value={user.username} /></Col>
-									<Col md={2}><Button variant="dark" onClick={idDuplicateCheck}>중복검사</Button>{' '}
+									<Col md={2}><Button size="m" variant="outline-info" onClick={idDuplicateCheck}>중복검사</Button>{' '}
 									</Col>
 								</Row>
 							</Form.Group>
@@ -164,8 +131,6 @@ const JoinModal = () => {
 									value={user.name} />
 							</Form.Group>
 
-							
-
 							<Form.Group as={Col} controlId="formGridEmail">
 								<Form.Label>이메일</Form.Label>
 								<Form.Control
@@ -176,39 +141,15 @@ const JoinModal = () => {
 									value={user.email} />
 							</Form.Group>
 
-							{/* <Form.Group as={Col} controlId="formGridEmail">
-								<Form.Label>휴대폰 번호 </Form.Label>
-								<Form.Control
-									type="tel"
-									name="phone"
-									placeholder="휴대폰번호"
-									onChange={inputHandle}
-									value={user.tel} />
-							</Form.Group>
-
-							<Form.Group as={Col} controlId="formGridEmail">
-								<Form.Label>지역 </Form.Label>
-								<Form.Control
-									type="text"
-									name="location"
-									placeholder="지역을 입력하세요"
-									onChange={inputHandle}
-									value={user.location} />
-							</Form.Group> */}
-
-							
-
-						
-
 							<Form.Group as={Col} controlId="formGridEmail">
 								<hr />
-								<Button variant="info" onClick={joinRequest}>회원가입</Button>{' '}
+								<Button size="m" variant="outline-info" onClick={joinRequest}>회원가입</Button>{' '}
 							</Form.Group>
 						</Form>
 					</Container>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>Close</Button>
+					<Button size="m" variant="outline-info" onClick={handleClose}>Close</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

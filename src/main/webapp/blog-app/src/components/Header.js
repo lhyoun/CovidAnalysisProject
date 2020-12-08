@@ -30,30 +30,30 @@ const Header = (props) => {
     // logout fetch 
     fetch(`http://localhost:8000/logout`, {
       method: "GET",
-      headers: {
-      }
     }).then(res => res.text())
       .then(res => {
         if (res === "ok") {
           setToken();
           alert("로그아웃에 성공하였습니다");
-        } else {
-          alert("로그아웃 실패");
-        }
+        } else alert("로그아웃 실패");
       });
   }
 
   const isLogin = (flag) => {
     if (flag) {
       return <Row>
-        <NavDropdown title="MYPAGE" id="basic-nav-dropdown">
+        <NavDropdown title="MY-TAB" id="basic-nav-dropdown">
           <NavDropdown.Item ><Nav.Link><Link to="/Mypage"><SpanTagStyle msg="MYPAGE"></SpanTagStyle></Link></Nav.Link></NavDropdown.Item>
-          <NavDropdown.Item ><Nav.Link><Link to="/MyTeam"><SpanTagStyle msg="MYTEAM"></SpanTagStyle></Link></Nav.Link></NavDropdown.Item>
-          {/* <NavDropdown.Divider />
-          <NavDropdown.Item ><Nav.Link><Link to="/"><SpanTagStyle msg="MYTEAM"></SpanTagStyle></Link></Nav.Link></NavDropdown.Item> */}
+          {/* <NavDropdown.Item ><Nav.Link><Link to="/MyTeam"><SpanTagStyle msg="MYTEAM"></SpanTagStyle></Link></Nav.Link></NavDropdown.Item> */}
+          {/* 선 */}
+          <NavDropdown.Divider />
+          <NavDropdown.Item ><Nav.Link><Link to="/"><SpanStyle onClick={logoutfunction}>Logout</SpanStyle></Link></Nav.Link></NavDropdown.Item>
         </NavDropdown>
+
         {/* <Nav.Link><Link to="/"><SpanTagStyle func={logoutfunction} msg="Logout"></SpanTagStyle></Link></Nav.Link> */}
-        <Nav.Link><Link to="/"><SpanStyle onClick={logoutfunction}>Logout</SpanStyle></Link></Nav.Link>
+
+        {/* 로그아웃 드롭다운 안으로 이동 */}
+        {/* <Nav.Link><Link to="/"><SpanStyle onClick={logoutfunction}>Logout</SpanStyle></Link></Nav.Link> */}
       </Row>
     } else {
       return <Row>
@@ -67,30 +67,33 @@ const Header = (props) => {
     <HeaderStyle>
       <Navbar bg="light" expand="lg">
 
-        <Nav.Link><Link to="/">
-          <LogoStyle msg={<Navbar.Brand >
-            <img src="/soccer_logo-removebg-preview.png"
-              width="30"
-              height="30"
-              alt="React Bootstrap logo" />{''}
+        {/* 로고 영역 */}
+        <Nav.Link>
+          <Link to="/">
+            <LogoStyle msg={<Navbar.Brand >
+              <img src="/KakaoTalk_20201208_122932091.png"
+                width="30"
+                height="30"
+                alt="React Bootstrap logo" />{''}
 
-              &nbsp;FIELD HERO
-          </Navbar.Brand>}></LogoStyle>
+                &nbsp;BCM
+            </Navbar.Brand>}></LogoStyle>
+          </Link>
+        </Nav.Link>
 
-        </Link></Nav.Link>
-        {/* 윗 부분 로고 */}
-
+        {/* 로그인 여부에 따른 메뉴 영역*/}
         {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             {isLogin(isToken)}
           </Nav>
         </Navbar.Collapse>
-        {/* 윗 부분 로그인 여부에 따른 메뉴 */}
         
       </Navbar>
     </HeaderStyle>
+    
   )
 };
 
 export default Header;
+
