@@ -123,8 +123,7 @@ const MainForm = () => {
 
 
               </Jumbotron>
-
-
+ 
               <Jumbotron>
                 <TitleH3TagStyle msg="지금 가려고 하는 곳이 얼마나 안전한지 확인해 보세요"></TitleH3TagStyle>
               </Jumbotron>
