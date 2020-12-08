@@ -1,7 +1,7 @@
 // ok
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table } from 'react-bootstrap';
 import TitleH3TagStyle from './constant/TitleH3TagStyle';
 import Br2 from './constant/Br2';
 
@@ -27,13 +27,13 @@ const MainForm = () => {
   };
 
   useEffect(() => {
-    // teamList fetch -> teamCard에 담아서 보여줌
-    fetch("http://localhost:8000/teamList", {
+    // 전체 확진 data
+    fetch("http://localhost:8000/allData", {
       method: "get",
     }).then((res) => res.json())
       .then((res) => {
-        console.log("mainForm teamList response [json type]", res);
-        setTeams(res);
+        console.log("mainForm allData [json type]", res);
+        setData(res);
       });
 
     // userList fetch -> userCard에 담아서 보여줌
@@ -54,6 +54,12 @@ const MainForm = () => {
         setRank(res);
       });
   }, []);
+
+  const [data, setData] = useState([{
+    
+  }]);
+
+
 
   const [rank, setRank] = useState([]);
   const [teams, setTeams] = useState([]);
@@ -121,9 +127,51 @@ const MainForm = () => {
 
                   {/* userlist tab */}
                   <Tab eventKey="alltime" title="ALL TIME">
-                    alltime page<br></br>
-                    전국 지도를 default로 하고<br></br>
-                    tab에서 지역을 선택하면 해당 지역의 최근 발생 근황을 covidmap처럼 보여준다
+                    <Br2/>
+
+                    <Table striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          <th>지역</th>
+                          <th>확진자</th>
+                          <th>국내</th>
+                          <th>해외</th>
+
+                          <th>누적확진자</th>
+                          <th>격리해제</th>
+                          <th>격리중</th>
+                          <th>사망</th>
+                          
+                          {/* 10만명당 */}
+                          <th>발생률</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        
+                          {data.map(
+                            (res) => (
+                              <tr>
+                            <td>{res.region}</td>
+                            <td>{res.total}</td>
+                            <td>{res.domestic}</td>
+                            <td>{res.abroad}</td>
+                            <td>{res.confirmed}</td>
+                            <td>{res.quarantined}</td>
+                            <td>{res.quarantine_released}</td>
+                            <td>{res.deaths}</td>
+                            <td>{res.occur_rate}</td>
+                            </tr>
+                          ))}
+
+                      </tbody>
+                    </Table>
+
+
+                    <Row>
+                      
+                    </Row>
+
                   </Tab>
                 </Tabs>
 
