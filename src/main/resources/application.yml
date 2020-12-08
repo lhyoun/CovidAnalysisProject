@@ -16,7 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/finalPro?serverTimezone=Asia/Seoul
     username: final
-    password: 1314
+    password: 1314user
 # database connect / jsp에서 context.xml에 적던 것
     
   jpa:
