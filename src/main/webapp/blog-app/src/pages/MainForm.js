@@ -64,7 +64,7 @@ const MainForm = () => {
         <MainCardStyle>
           <JumbotronStyle>
           <Jumbotron>
-            <TitleH1TagStyle msg="아마추어 축구 여기서 시작하세요!"></TitleH1TagStyle>
+            <TitleH1TagStyle msg="아마추어 축구 여기서 시작하지 마세요!"></TitleH1TagStyle>
             
             <TeamCreateModal></TeamCreateModal>
             <hr />
