@@ -1,15 +1,14 @@
 // ok
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col, Jumbotron, Tabs, Tab } from 'react-bootstrap';
-import TeamCard from '../components/card/TeamCard';
-import UserCard from '../components/card/UserCard';
-import Slide from '../components/Slide';
-import SpanTagStyle from './constant/SpanTagStyle';
-import TitleH1TagStyle from './constant/TitleH1TagStyle';
+import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner } from 'react-bootstrap';
 import TitleH3TagStyle from './constant/TitleH3TagStyle';
 import Br2 from './constant/Br2';
-import TeamCreateModal from "../components/modal/TeamCreateModal";
+
+const MainFormTopMarginStyle = styled.div`
+    margin-top:4%;
+`;
+
 
 const MainCardStyle = styled.div`
   width: 100%;
@@ -53,69 +52,95 @@ const MainForm = () => {
   const [rank, setRank] = useState([]);
   const [teams, setTeams] = useState([]);
   const [users, setUsers] = useState([]);
+  const [locate, setLocate] = useState('busan');
+
+  const week_locate = (locate) => {
+    if (locate === 'busan') {
+      return <div>
+        this is busan data area
+      </div>
+    } else {
+      return <div>
+        this is seoul data area
+      </div>
+    }
+  }
 
   return (
     <Container>
-      <br/>
-        <br/>
-          <br/>
-      <Slide />
-      <Row>
-        <MainCardStyle>
-          <JumbotronStyle>
-          <Jumbotron>
-            <TitleH1TagStyle msg="아마추어 축구 여기서 시작하지 마세요!"></TitleH1TagStyle>
-            
-            <TeamCreateModal></TeamCreateModal>
-            <hr />
+      <MainFormTopMarginStyle>
+        <Br2/>
+        {/* <Slide /> */}
 
-            <TitleH3TagStyle msg="원하는 팀과 선수를 찾아보세요"></TitleH3TagStyle>
-            <Tabs defaultActiveKey="rank" id="uncontrolled-tab-example">
 
-              {/* teamlist tab */}
-              <Tab eventKey="team" title="TEAM">
-                <Row>
-                  {teams.map((res) => (<Col md={4}><TeamCard team={res} key={res.id}></TeamCard></Col>))}
-                </Row>
-              </Tab>
+        <Row>
+          <MainCardStyle>
+            <JumbotronStyle>
+              <Jumbotron>
 
-              {/* userlist tab */}
-              <Tab eventKey="user" title="PLAYER">
-                <Row>
-                  {users.map((res) => (<Col md={4}><UserCard user={res} key={res.id}></UserCard></Col>))}
-                </Row>
-              </Tab>
 
-              {/* rank tab */}
-              <Tab eventKey="rank" title="RANK">
+                <TitleH3TagStyle msg="This page title is busan covid map"></TitleH3TagStyle>
                 <Br2/>
-                <Row>
-                  <Col md={2}></Col>
-                  <Col md={1}><SpanTagStyle msg="RANK"></SpanTagStyle></Col>
-                  <Col md={3}><SpanTagStyle msg="TEAM"></SpanTagStyle></Col>
-                  <Col md={1}><SpanTagStyle msg="SCORE"></SpanTagStyle></Col>
-                  <Col md={1}><SpanTagStyle msg="W"></SpanTagStyle></Col>
-                  <Col md={1}><SpanTagStyle msg="L"></SpanTagStyle></Col>
-                  <Col md={1}><SpanTagStyle msg="D"></SpanTagStyle></Col>
-                  <Col md={2}></Col>
-                  <Col md={12}><hr/></Col>
-                </Row>
-                {rank.map((res) => <Row>
-                  <Col md={2}></Col>
-                  <Col md={1}>{res.rank}</Col>
-                  <Col md={3}>{res.team.name}</Col>
-                  <Col md={1}>{res.total}</Col>
-                  <Col md={1}>{res.win}</Col>
-                  <Col md={1}>{res.lose}</Col>
-                  <Col md={1}>{res.draw}</Col>
-                  <Col md={2}></Col>
-                </Row>)}
-              </Tab>
-            </Tabs>
-          </Jumbotron>
-       </JumbotronStyle>
-        </MainCardStyle>
-      </Row>
+
+                <Tabs defaultActiveKey="today" id="uncontrolled-tab-example">
+                
+                  {/* teamlist tab */}
+                  <Tab eventKey="today" title="TODAY">
+                    today page
+                  </Tab>
+
+                  {/* rank tab */}
+                  <Tab eventKey="week" title="THIS WEEK">
+                    <Br2/>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      key={1}
+                      id={`dropdown-button-drop`}
+                      size="sm"
+                      variant="outline-secondary"
+                      title="Select locate"
+                      onSelect={(eventKey)=>{
+                        setLocate(eventKey)
+                        console.log('이전에 선택되어 있던 key는 ', locate);
+                      }}
+                    >
+                      <Dropdown.Item eventKey="busan">Busan</Dropdown.Item>
+                      <Dropdown.Item eventKey="seoul">Seoul</Dropdown.Item>
+                      {/* <Dropdown.Divider /> */}
+                    </DropdownButton>
+                    
+                    {week_locate(locate)}
+
+                  </Tab>
+
+                  {/* userlist tab */}
+                  <Tab eventKey="alltime" title="ALL TIME">
+                    alltime page<br></br>
+                    전국 지도를 default로 하고<br></br>
+                    tab에서 지역을 선택하면 해당 지역의 최근 발생 근황을 covidmap처럼 보여준다
+                  </Tab>
+                </Tabs>
+
+
+              </Jumbotron>
+
+
+              <Jumbotron>
+                <TitleH3TagStyle msg="지금 가려고 하는 곳이 얼마나 안전한지 확인해 보세요"></TitleH3TagStyle>
+              </Jumbotron>
+
+              <Jumbotron>
+                <TitleH3TagStyle msg="우리 동네의 확진 소식을 받아보세요"></TitleH3TagStyle>
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+              </Jumbotron>
+            </JumbotronStyle>
+          </MainCardStyle>
+        </Row>
+
+
+      </MainFormTopMarginStyle>
     </Container>
   );
 };

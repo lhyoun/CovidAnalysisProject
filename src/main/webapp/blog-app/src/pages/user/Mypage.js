@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Jumbotron, Container, Tooltip, Button, OverlayTrigger, Col, Card, Accordion } from 'react-bootstrap';
+import { Jumbotron, Container, Tooltip, Button, OverlayTrigger, Col, Card, Accordion, Alert, Breadcrumb, Nav } from 'react-bootstrap';
 import styled from 'styled-components';
 import SpanTagStyle from '../constant/SpanTagStyle';
 
@@ -71,6 +71,79 @@ const Mypage = () => {
 		<Container>
 			<SlideStyle>
 				<MainCardStyle>
+
+				<Alert variant="success">
+  <Alert.Heading>Hey, nice to see you</Alert.Heading>
+  <p>
+    Aww yeah, you successfully read this important alert message. This example
+    text is going to run a bit longer so that you can see how spacing within an
+    alert works with this kind of content.
+  </p>
+  <hr />
+  <p className="mb-0">
+    Whenever you need to, be sure to use margin utilities to keep things nice
+    and tidy.
+  </p>
+</Alert>
+
+<Card>
+  <Card.Header>
+    <Nav variant="tabs" defaultActiveKey="#first">
+      <Nav.Item>
+        <Nav.Link href="#first">Active</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#link">Link</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#disabled" disabled>
+          Disabled
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  </Card.Header>
+  <Card.Body>
+    <Card.Title>Special title treatment</Card.Title>
+    <Card.Text>
+      With supporting text below as a natural lead-in to additional content.
+    </Card.Text>
+    <Button variant="primary">Go somewhere</Button>
+  </Card.Body>
+</Card>
+
+
+<Breadcrumb>
+  <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+  <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+    Library
+  </Breadcrumb.Item>
+  <Breadcrumb.Item active>Data</Breadcrumb.Item>
+</Breadcrumb>
+
+<Accordion>
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+        Click me!
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>Hello! I'm the body</Card.Body>
+    </Accordion.Collapse>
+  </Card>
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle as={Button} variant="link" eventKey="1">
+        Click me!
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="1">
+      <Card.Body>Hello! I'm another body</Card.Body>
+    </Accordion.Collapse>
+  </Card>
+</Accordion>
+
+
 
 					<Jumbotron>
 						<h4>
