@@ -31,7 +31,7 @@ public class CovidAlarmController {
 	
 	@GetMapping("/CovidAlarm")
 	public List<CovidAlarm> allData() {
-		return CovidAlarmRepository.findAll();
+		return CovidAlarmRepository.CovidAlarm_All();
 	}
 	
 }

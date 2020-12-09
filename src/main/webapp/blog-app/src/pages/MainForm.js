@@ -36,14 +36,13 @@ const MainForm = () => {
         setData(res);
       });
 
-    // userList fetch -> userCard에 담아서 보여줌
-    fetch("http://localhost:8000/userList", {
-      method: "get",
-    }).then((res) => res.json())
-      .then((res) => {
-        console.log("mainForm userList response [json type]", res);
-        setUsers(res);
-      });
+      fetch("http://localhost:8000/CovidAlarm", {
+        method: "get",
+      }).then((res) => res.json())
+        .then((res) => {
+          console.log("mainForm CovidAlarm [json type]", res);
+          setCovidAlarm(res);
+        });
 
     // rank fetch -> rank tab에서 보여줌
     fetch("http://localhost:8000/rank", {
@@ -56,6 +55,10 @@ const MainForm = () => {
   }, []);
 
   const [data, setData] = useState([{
+    
+  }]);
+
+  const [covidAlarm, setCovidAlarm] = useState([{
     
   }]);
 
@@ -98,58 +101,57 @@ const MainForm = () => {
                 
                   {/* teamlist tab */}
                   <Tab eventKey="today" title="TODAY">
-                    <Br2/>
+                    <br/>
 
-                    <Row> 
-                        <Col md={4}>                      
-                          <Card border="info" style={{ width: '18rem' }}>
-                            <Card.Header>부산 진구</Card.Header>
-                            <Card.Body>
-                              {/* <Card.Title>진구</Card.Title> */}
-                              <Card.Text>
-                                this is msg area
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-
-
-                        <Col md={4}>                      
-                          <Card border="info" style={{ width: '18rem' }}>
-                            <Card.Header>부산 진구</Card.Header>
-                            <Card.Body>
-                              {/* <Card.Title>진구</Card.Title> */}
-                              <Card.Text>
-                                this is msg area
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-
-                        <Col md={4}>                      
-                          <Card border="info" style={{ width: '18rem' }}>
-                            <Card.Header>부산 진구</Card.Header>
-                            <Card.Body>
-                              {/* <Card.Title>진구</Card.Title> */}
-                              <Card.Text>
-                                this is msg area
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                    </Row>
-                  </Tab>
-
-                  {/* rank tab */}
-                  <Tab eventKey="week" title="THIS WEEK">
-                    <Br2/>
                     <DropdownButton
                       as={ButtonGroup}
                       key={1}
                       id={`dropdown-button-drop`}
                       size="sm"
                       variant="outline-primary"
-                      title="Select locate"
+                      title="Select region"
+                      onSelect={(eventKey)=>{
+                        setLocate(eventKey)
+                        console.log('이전에 선택되어 있던 key는 ', locate);
+                      }}
+                    >
+                      <Dropdown.Item eventKey="busan">Busan</Dropdown.Item>
+                      <Dropdown.Item eventKey="seoul">Seoul</Dropdown.Item>
+                      {/* <Dropdown.Divider /> */}
+                    </DropdownButton>
+
+
+                    <Row> 
+                      {covidAlarm.map(
+                        (res) => (
+                          <Col md={4}>  
+                            <MainFormTopMarginStyle>
+                              <Card border="info" style={{ width: '18rem' }}>
+                                <Card.Header>{res.city}</Card.Header>
+                                <Card.Body>
+                                  <Card.Title>{res.time}</Card.Title>
+                                  <Card.Text>
+                                    {res.message}
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                            </MainFormTopMarginStyle>         
+                          </Col>
+                      ))}
+                    </Row>
+                    
+                  </Tab>
+
+                  {/* rank tab */}
+                  <Tab eventKey="week" title="THIS WEEK">
+                    <br/>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      key={1}
+                      id={`dropdown-button-drop`}
+                      size="sm"
+                      variant="outline-primary"
+                      title="Select region"
                       onSelect={(eventKey)=>{
                         setLocate(eventKey)
                         console.log('이전에 선택되어 있던 key는 ', locate);
@@ -166,7 +168,7 @@ const MainForm = () => {
 
                   {/* userlist tab */}
                   <Tab eventKey="alltime" title="ALL TIME">
-                    <Br2/>
+                    <br/>
 
                     <Table striped bordered hover size="sm">
                       <thead>
