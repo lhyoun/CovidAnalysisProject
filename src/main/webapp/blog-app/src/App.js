@@ -40,6 +40,7 @@ const App = () => {
       <Background></Background>
 
       {/* 아래는 Router */}
+      
       <Route path="/" exact={true} component={MainForm}></Route>
       {/* 메인화면 */}
 

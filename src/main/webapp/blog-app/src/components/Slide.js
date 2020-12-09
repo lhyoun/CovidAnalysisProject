@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const SlideStyle = styled.div`
 	margin-top:4%;
-	top: 130px
+	top: 130px;
 	margin-bottom:4%;
 `;
 
@@ -13,7 +13,7 @@ const ImageStyle =styled.image`
 	min-width: 100%;
 	height: 500px;
 `;
-
+ 
 const VideoStyle=styled.video`
 	min-width: 100%;
 	height: 500px;
