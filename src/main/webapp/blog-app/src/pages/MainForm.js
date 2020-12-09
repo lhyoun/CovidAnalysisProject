@@ -1,7 +1,7 @@
 // ok
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table, Card } from 'react-bootstrap';
 import TitleH3TagStyle from './constant/TitleH3TagStyle';
 import Br2 from './constant/Br2';
 
@@ -98,7 +98,46 @@ const MainForm = () => {
                 
                   {/* teamlist tab */}
                   <Tab eventKey="today" title="TODAY">
-                    today page
+                    <Br2/>
+
+                    <Row> 
+                        <Col md={4}>                      
+                          <Card border="info" style={{ width: '18rem' }}>
+                            <Card.Header>부산 진구</Card.Header>
+                            <Card.Body>
+                              {/* <Card.Title>진구</Card.Title> */}
+                              <Card.Text>
+                                this is msg area
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+
+
+                        <Col md={4}>                      
+                          <Card border="info" style={{ width: '18rem' }}>
+                            <Card.Header>부산 진구</Card.Header>
+                            <Card.Body>
+                              {/* <Card.Title>진구</Card.Title> */}
+                              <Card.Text>
+                                this is msg area
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+
+                        <Col md={4}>                      
+                          <Card border="info" style={{ width: '18rem' }}>
+                            <Card.Header>부산 진구</Card.Header>
+                            <Card.Body>
+                              {/* <Card.Title>진구</Card.Title> */}
+                              <Card.Text>
+                                this is msg area
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                    </Row>
                   </Tab>
 
                   {/* rank tab */}
