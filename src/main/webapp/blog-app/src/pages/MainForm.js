@@ -4,6 +4,12 @@ import styled from 'styled-components';
 import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table, Card } from 'react-bootstrap';
 import TitleH3TagStyle from './constant/TitleH3TagStyle';
 import Br2 from './constant/Br2';
+import MyTeam from './team/MyTeam';
+import CovidCountry from './covid/CovidCountry';
+
+
+
+
 
 const MainFormTopMarginStyle = styled.div`
     margin-top:4%;
@@ -218,9 +224,13 @@ const MainForm = () => {
 
 
               </Jumbotron>
- 
+              <Jumbotron>
+                <TitleH3TagStyle msg="국가별 통계를 비교해보세요"></TitleH3TagStyle>
+               <CovidCountry></CovidCountry>
+              </Jumbotron>
               <Jumbotron>
                 <TitleH3TagStyle msg="지금 가려고 하는 곳이 얼마나 안전한지 확인해 보세요"></TitleH3TagStyle>
+               
                 <Br2/>
 
                 <Form inline>

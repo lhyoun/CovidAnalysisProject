@@ -9,6 +9,7 @@ import Background from './components/Background';
 import Team_schedule from './pages/team/Team_schedule';
 import Mypage from './pages/user/Mypage';
 import LoginModal from './components/modal/LoginModal';
+import CovidCountry from './pages/covid/CovidCountry';
 /* import Footer from './components/Footer';
  */
 const App = () => {
