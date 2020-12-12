@@ -1,9 +1,15 @@
 // ok
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron, Tabs, Tab, SplitButton, ButtonGroup, Dropdown, DropdownButton, FormControl, Spinner, Form, Button, Table, Card } from 'react-bootstrap';
 import TitleH3TagStyle from './constant/TitleH3TagStyle';
 import Br2 from './constant/Br2';
+import MyTeam from './team/MyTeam';
+import CovidCountry from './covid/CovidCountry';
+
+
+
+
 
 const MainFormTopMarginStyle = styled.div`
     margin-top:4%;
@@ -36,14 +42,13 @@ const MainForm = () => {
         setData(res);
       });
 
-    // userList fetch -> userCard에 담아서 보여줌
-    fetch("http://localhost:8000/userList", {
-      method: "get",
-    }).then((res) => res.json())
-      .then((res) => {
-        console.log("mainForm userList response [json type]", res);
-        setUsers(res);
-      });
+      fetch("http://localhost:8000/CovidAlarm", {
+        method: "get",
+      }).then((res) => res.json())
+        .then((res) => {
+          console.log("mainForm CovidAlarm [json type]", res);
+          setCovidAlarm(res);
+        });
 
     // rank fetch -> rank tab에서 보여줌
     fetch("http://localhost:8000/rank", {
@@ -56,6 +61,10 @@ const MainForm = () => {
   }, []);
 
   const [data, setData] = useState([{
+    
+  }]);
+
+  const [covidAlarm, setCovidAlarm] = useState([{
     
   }]);
 
@@ -98,19 +107,57 @@ const MainForm = () => {
                 
                   {/* teamlist tab */}
                   <Tab eventKey="today" title="TODAY">
-                    today page
-                  </Tab>
+                    <br/>
 
-                  {/* rank tab */}
-                  <Tab eventKey="week" title="THIS WEEK">
-                    <Br2/>
                     <DropdownButton
                       as={ButtonGroup}
                       key={1}
                       id={`dropdown-button-drop`}
                       size="sm"
                       variant="outline-primary"
-                      title="Select locate"
+                      title="Select region"
+                      onSelect={(eventKey)=>{
+                        setLocate(eventKey)
+                        console.log('이전에 선택되어 있던 key는 ', locate);
+                      }}
+                    >
+                      <Dropdown.Item eventKey="busan">Busan</Dropdown.Item>
+                      <Dropdown.Item eventKey="seoul">Seoul</Dropdown.Item>
+                      {/* <Dropdown.Divider /> */}
+                    </DropdownButton>
+
+
+                    <Row> 
+                      {covidAlarm.map(
+                        (res) => (
+                          <Col md={4}>  
+                            <MainFormTopMarginStyle>
+                              <Card border="info" style={{ width: '18rem' }}>
+                                <Card.Header>{res.city}</Card.Header>
+                                <Card.Body>
+                                  <Card.Title>{res.time}</Card.Title>
+                                  <Card.Text>
+                                    {res.message}
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                            </MainFormTopMarginStyle>         
+                          </Col>
+                      ))}
+                    </Row>
+                    
+                  </Tab>
+
+                  {/* rank tab */}
+                  <Tab eventKey="week" title="THIS WEEK">
+                    <br/>
+                    <DropdownButton
+                      as={ButtonGroup}
+                      key={1}
+                      id={`dropdown-button-drop`}
+                      size="sm"
+                      variant="outline-primary"
+                      title="Select region"
                       onSelect={(eventKey)=>{
                         setLocate(eventKey)
                         console.log('이전에 선택되어 있던 key는 ', locate);
@@ -127,7 +174,7 @@ const MainForm = () => {
 
                   {/* userlist tab */}
                   <Tab eventKey="alltime" title="ALL TIME">
-                    <Br2/>
+                    <br/>
 
                     <Table striped bordered hover size="sm">
                       <thead>
@@ -177,9 +224,13 @@ const MainForm = () => {
 
 
               </Jumbotron>
- 
+              <Jumbotron>
+                <TitleH3TagStyle msg="국가별 통계를 비교해보세요"></TitleH3TagStyle>
+               <CovidCountry></CovidCountry>
+              </Jumbotron>
               <Jumbotron>
                 <TitleH3TagStyle msg="지금 가려고 하는 곳이 얼마나 안전한지 확인해 보세요"></TitleH3TagStyle>
+               
                 <Br2/>
 
                 <Form inline>
