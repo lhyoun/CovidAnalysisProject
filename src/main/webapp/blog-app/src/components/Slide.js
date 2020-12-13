@@ -28,7 +28,7 @@ const Slide = () => {
 					<Carousel>
 						<Carousel.Item>
 						<VideoStyle className='videoTag' autoPlay loop muted>
-   						 	<source src='neonbg.mp4' type='video/mp4' />
+   						 	<source src='databg.mp4' type='video/mp4' />
 						</VideoStyle>
 							<Carousel.Caption>
 								<h1>FIELD HERO </h1>
@@ -41,9 +41,9 @@ const Slide = () => {
 							</VideoStyle>
 							<Carousel.Caption>
 								<h3></h3>
-								<h4>
+								<h1>
 									필드히어로에서 축구 실력을 업그레이드 하고 필드히어로에 있는 전국의 팀들과 게임을 즐기기만 하면 됩니다.
-								</h4>
+								</h1>
 							</Carousel.Caption>
 						</Carousel.Item>
 					</Carousel>
