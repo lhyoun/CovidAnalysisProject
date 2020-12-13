@@ -3,7 +3,7 @@ import { Container, Row, Col, Jumbotron, Tabs, Tab, ButtonGroup, Dropdown, Dropd
 import styled from 'styled-components';
 import Br2 from '../../pages/constant/Br2';
 import TitleH3TagStyle from '../../pages/constant/TitleH3TagStyle';
-import CovidCountry from '../../pages/covid/CovidCountry';
+import CovidCountry from '../graph/CovidCountry';
 
 const A = () => {
     return (

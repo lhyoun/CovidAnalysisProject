@@ -6,7 +6,7 @@ import TitleH3TagStyle from '../../pages/constant/TitleH3TagStyle';
 const MainFormTopMarginStyle = styled.div`
     margin-top:4%;
 `;
-const Korea = (props) => {
+const Korea = () => {
     const inputHandle = (e) => {
         setSearch_region(e.target.value);
       };
