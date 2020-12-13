@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import Header from './components/Header';
 import MainForm from './pages/MainForm';
-import Team_create from './pages/team/Team_create';
-import Team_detail from './pages/team/Team_detail';
-import MyTeam from './pages/team/MyTeam';
 import Background from './components/Background';
-import Team_schedule from './pages/team/Team_schedule';
-import Mypage from './pages/user/Mypage';
-import LoginModal from './components/modal/LoginModal';
-import CovidCountry from './pages/covid/CovidCountry';
+
 /* import Footer from './components/Footer';
  */
 const App = () => {
@@ -50,13 +44,7 @@ const App = () => {
       {/* <LoginModal setLoginId={() => setID()}></LoginModal> */}
       {/* 로그인과 회원가입, 둘 다 모달로 처리 */}
 
-      <Route path="/Team_detail/:id" exact={true} component={Team_detail}></Route>
-      <Route path="/Team_schedule/:id" exact={true} component={Team_schedule}></Route>
 
-        {/* <Route path="/Team_create" exact={true} component={MainForm}></Route> */}
-
-      <Route path="/MyTeam" exact={true} component={MyTeam}><MyTeam loginId={loginId}></MyTeam></Route>
-      <Route path="/Mypage" exact={true} component={Mypage}></Route>
 
 {/*       <Footer></Footer>
  */}
