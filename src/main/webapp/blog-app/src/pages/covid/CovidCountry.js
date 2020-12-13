@@ -10,7 +10,7 @@ const CovidCountry = () => {
 			method: "get",
 		}).then((res) => res.json())
 			.then((res) => {
-				console.log("teamDetailForm teamDetail info fetch (json type) ", res);
+ console.log(res.positive_rate)
 				setPositive_Rate(res.positive_rate);
 				setTotal_cases_per_million(res.total_cases_per_million);
 				setNew_cases_per_million(res.new_cases_per_million);
